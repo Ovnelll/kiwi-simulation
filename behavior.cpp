@@ -15,11 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "cluon-complete.hpp"
 #include "behavior.hpp"
 
 Behavior::Behavior() noexcept:
-  cluon::data::TimeStamp startTime = cluon::time::now();
-
   m_frontUltrasonicReading{},
   m_rearUltrasonicReading{},
   m_leftIrReading{},
@@ -32,6 +31,8 @@ Behavior::Behavior() noexcept:
   m_rightIrReadingMutex{},
   m_groundSteeringAngleRequestMutex{},
   m_pedalPositionRequestMutex{}
+
+  cluon::data::TimeStamp startTime = cluon::time::now();
 {
 }
 
