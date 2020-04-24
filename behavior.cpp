@@ -18,6 +18,8 @@
 #include "behavior.hpp"
 
 Behavior::Behavior() noexcept:
+  cluon::data::TimeStamp startTime = cluon::time::now();
+
   m_frontUltrasonicReading{},
   m_rearUltrasonicReading{},
   m_leftIrReading{},
@@ -93,10 +95,7 @@ void Behavior::step() noexcept
   double leftDistance = convertIrVoltageToDistance(leftIrReading.voltage());
   double rightDistance = convertIrVoltageToDistance(rightIrReading.voltage());
   
-  
-  cluon::data::TimeStamp startTime = cluon::time::now();
-  int64_t startTimeUs = cluon::time::toMicroseconds(startTime);
-  
+  int64_t startTimeUs = cluon::time::toMicroseconds([startTime]);
   cluon::data::TimeStamp currentTime = cluon::time::now();
   int64_t currentTimeUs = cluon::time::toMicroseconds(currentTime);
 
@@ -112,8 +111,7 @@ void Behavior::step() noexcept
       groundSteeringAngle = ( 1f / 4f + 3f / 40f - (currentTimeUs - startTimeUs) / 40f ) / 0.12f;
     }
   }
-
-
+  
   {
     std::lock_guard<std::mutex> lock1(m_groundSteeringAngleRequestMutex);
     std::lock_guard<std::mutex> lock2(m_pedalPositionRequestMutex);
