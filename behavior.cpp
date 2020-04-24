@@ -104,12 +104,12 @@ void Behavior::step() noexcept
   float groundSteeringAngle = 0f;
   
   if ((currentTimeUs - startTimeUs) <= 3f) {
-    pedalPosition = (currentTimeUs - startTimeUs) / 12f;
-    groundSteeringAngle = (currentTimeUs - startTimeUs) / 12f / 0.12f;
+    pedalPosition = (currentTimeUs - startTimeUs) / 6f;
+    groundSteeringAngle = (currentTimeUs - startTimeUs) / 6f / 0.12f;
   } else {
     if ((currentTimeUs - startTimeUs) <= 10f) {
-      pedalPosition = 1f / 4f - 3f / 40f + (currentTimeUs - startTimeUs) / 40f;
-      groundSteeringAngle = ( 1f / 4f + 3f / 40f - (currentTimeUs - startTimeUs) / 40f ) / 0.12f;
+      pedalPosition = 1f / 2f - 3f / 20f + (currentTimeUs - startTimeUs) / 20f;
+      groundSteeringAngle = ( 1f / 2f + 3f / 20f - (currentTimeUs - startTimeUs) / 20f ) / 0.12f;
     }
   }
   
